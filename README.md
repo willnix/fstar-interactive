@@ -1,6 +1,6 @@
 # fstar-interactive
 F\* support for vistual studio code
-It is and probably will allways be very hacky, but I'm to stupid for emacs so I hope this'll work better for me.
+It is and probably will allways be very hacky, but I'm too stupid for emacs so I hope this'll work better for me.
 
 ## progress
 - Syntax highlighting is a blunt rip-off of the vscode ocaml plugin [works better than expected]
