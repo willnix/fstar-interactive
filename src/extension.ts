@@ -42,8 +42,13 @@ export function activate(context: vscode.ExtensionContext) {
         if(typeof fstarProcess === 'undefined') {
             fstarProcess = spawn("fstar.exe --in", { cwd: dirname(vscode.window.activeTextEditor.document.fileName), shell: true});
             fstarProcessList[fileUri] = fstarProcess
+            fstarProcess.on('error', (err) => {
+                console.log('Error: '+err);
+            });
+        }
 
-            fstarProcess.stdout.on('data', (data) => {
+        // register handler to deal with fstars reponse
+        fstarProcess.stdout.once('data', (data) => {
                 processBlockResponse(data);
                 // done with current block
                 // next block starts 2 lines after the current one
@@ -57,7 +62,6 @@ export function activate(context: vscode.ExtensionContext) {
                     delete fstarProcessList[fileUri]
                 }
             });
-        }
 
         let code = editor.document.getText();
         // split code in blocks
@@ -71,13 +75,47 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Verify until cursor
     let disposableToCursor = vscode.commands.registerCommand('extension.verifyToCursor', () => {
-        // Spawn a seperate fstar process
-       let fstarProcess = spawn("fstar.exe --in", { cwd: dirname(vscode.window.activeTextEditor.document.fileName), shell: true});
-       let currentBlock = 0;
-       let currentBlockStart = 0;
-
-        // Get the cursor position
         let editor  = vscode.window.activeTextEditor;
+        let fileUri = editor.document.uri.toString()
+        let fstarProcess = fstarProcessList[fileUri]
+        let currentBlock = currentBlockList[fileUri]
+        let currentBlockStart = currentBlockStartList[fileUri]
+
+         // make sure everything is initialized
+        if(typeof currentBlock === 'undefined') {
+            currentBlock = 0;
+            currentBlockList[fileUri] = currentBlock;
+        }
+        if(typeof currentBlockStart === 'undefined') {
+            currentBlockStart = 0;
+            currentBlockStartList[fileUri] = currentBlockStart;
+        }
+
+        // until I figure out how to tell fstar to start over we kill any running proc and start a new one
+        if(typeof fstarProcess !== 'undefined') {
+            fstarProcess.kill()
+            delete fstarProcessList[fileUri]
+        }
+        fstarProcess = spawn("fstar.exe --in", { cwd: dirname(vscode.window.activeTextEditor.document.fileName), shell: true});
+        fstarProcessList[fileUri] = fstarProcess
+        fstarProcess.on('error', (err) => {
+            console.log('Error: '+err);
+        });
+
+        // register handler to deal with fstars reponse
+        fstarProcess.stdout.on('data', (data) => {
+            processBlockResponse(data);
+            // done with current block
+            // next block starts 2 lines after the current one
+            currentBlockStart += codeBlocks[currentBlock].split(endOfLine).length+2;
+            currentBlockStartList[fileUri] = currentBlockStart;
+            currentBlock++;
+            currentBlockList[fileUri] = currentBlock;
+
+            nextBlock();
+        });
+        
+        // Get the cursor position
         let cursorPos = editor.selection.active;
         let range = new vscode.Range(new vscode.Position(0,0),cursorPos);
         let code = editor.document.getText(range);
@@ -90,16 +128,6 @@ export function activate(context: vscode.ExtensionContext) {
         fstarProcess.stdin.write(codeBlocks[currentBlock]);
         fstarProcess.stdin.write("\n#end #done-ok #done-nok\n");
 
-        fstarProcess.stdout.on('data', (data) => {
-            processBlockResponse(data);
-            // done with current block
-            // next block starts 2 lines after the current one
-            currentBlockStart += codeBlocks[currentBlock].split(endOfLine).length+2;
-            currentBlock++;
-
-            nextBlock();
-        });
-
         // nextBlock() writes a block to the fstar process
         function nextBlock() {
             if(currentBlock<codeBlocks.length) {
@@ -108,7 +136,8 @@ export function activate(context: vscode.ExtensionContext) {
                 // tell fstar we're done
                 fstarProcess.stdin.write("\n#end #done-ok #done-nok\n");
             } else {
-                fstarProcess.kill()
+                // we're done
+                fstarProcess.stdout.removeAllListeners('data')
             }
         }
 
