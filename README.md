@@ -12,4 +12,4 @@ It is and probably will allways be very hacky, but I'm too stupid for emacs so I
 | Keys           |Action                                      |
 |----------------|--------------------------------------------|
 |``CTRL+ALT+C``  | Process the file up to the curser position |
-|``CTRL+ALT+D``  | Process complete file                      |
+|``CTRL+ALT+D``  | Process next block                     	  |
