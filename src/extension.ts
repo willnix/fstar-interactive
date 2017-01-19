@@ -40,7 +40,7 @@ export function activate(context: vscode.ExtensionContext) {
         }
         // spawn the fstar process if it is not running
         if(typeof fstarProcess === 'undefined') {
-            fstarProcess = spawn(vscode.workspace.getConfiguration('fstar.exePath'), ["--in"], { cwd: dirname(vscode.window.activeTextEditor.document.fileName), shell: true});
+            fstarProcess = spawn(vscode.workspace.getConfiguration('fstar')['exePath'], ["--in"], { cwd: dirname(vscode.window.activeTextEditor.document.fileName), shell: true});
             fstarProcessList[fileUri] = fstarProcess
             fstarProcess.on('error', (err) => {
                 console.log('Error: '+err);
@@ -96,7 +96,7 @@ export function activate(context: vscode.ExtensionContext) {
             fstarProcess.kill()
             delete fstarProcessList[fileUri]
         }
-        fstarProcess = spawn(vscode.workspace.getConfiguration('fstar.exePath'), ["--in"], { cwd: dirname(vscode.window.activeTextEditor.document.fileName), shell: true});
+        fstarProcess = spawn(vscode.workspace.getConfiguration('fstar')['exePath'], ["--in"], { cwd: dirname(vscode.window.activeTextEditor.document.fileName), shell: true});
         fstarProcessList[fileUri] = fstarProcess
         fstarProcess.on('error', (err) => {
             console.log('Error: '+err);
