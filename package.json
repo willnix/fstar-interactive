@@ -47,7 +47,17 @@
             "language": "fstar",
             "scopeName": "source.fstar",
             "path": "./syntaxes/FStar.tmLanguage"
-        }]
+        }],
+        "configuration": {
+        "type": "object",
+        "title": "FStar configuration",
+        "properties": {
+            "fstar.exePath": {
+                "type": "string",
+                "default": "~/.opam/system/bin/fstar.exe",
+                "description": "Specifies the path to fstar.exe."
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
