@@ -13,6 +13,7 @@ It is and probably will allways be very hacky, but I'm too stupid for emacs so I
 |----------------|--------------------------------------------|
 |``CTRL+ALT+C``  | Process the file up to the cursor position |
 |``CTRL+ALT+D``  | Process next block                     	  |
+|``CTRL+ALT+R``  | Reset everything                   	      |
 
 ## ligatures
 - Install the ``prettify-symbols-mode`` extension and [FiraCode](https://github.com/tonsky/FiraCode)
@@ -27,7 +28,7 @@ It is and probably will allways be very hacky, but I'm too stupid for emacs so I
     "prettifySymbolsMode.substitutions": [{
     "language": "fstar",
     "substitutions": [
-        { "ugly": "*", "pretty": "×", "pre": "\\b", "post": "\\b" },
+        { "ugly": "\\*", "pretty": "×", "pre": "\\b", "post": "\\b" },
         { "ugly": "~>", "pretty": "↝", "pre": "\\b", "post": "\\b" },
         { "ugly": "<=", "pretty": "≤", "pre": "\\b", "post": "\\b" },
         { "ugly": ">=", "pretty": "≥", "pre": "\\b", "post": "\\b" },
