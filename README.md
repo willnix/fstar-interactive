@@ -43,8 +43,6 @@ It is and probably will allways be very hacky, but I'm too stupid for emacs so I
         { "ugly": "==>", "pretty": "⟹"},
         { "ugly": "=>", "pretty": "⇒"},
         { "ugly": "->", "pretty": "→"},
-        //{ "ugly": "\\(\\|", "pretty": "10629", "pre": "\\b", "post": "\\b" },
-        //{ "ugly": "\\|\\)", "pretty":  "10630", "pre": "\\b", "post": "\\b" },
         { "ugly": "sqrt\\s?",      "pretty": "√", "pre": "\\b", "post": "\\b" },
         { "ugly": "'a", "pretty": "α", "pre": "\\b", "post": "\\b" },
         { "ugly": "'b", "pretty": "β", "pre": "\\b", "post": "\\b" },
