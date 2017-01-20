@@ -20,9 +20,6 @@ It is and probably will allways be very hacky, but I'm too stupid for emacs so I
 - Add the following lines to your user ``settings.json``:
 ```javascript
 {
-    "editor.fontFamily": "Fira Code",
-    "editor.fontSize": 14,
-
     "prettifySymbolsMode.revealOn": "cursor",
     "prettifySymbolsMode.adjustCursorMovement": true,
     "prettifySymbolsMode.substitutions": [{
