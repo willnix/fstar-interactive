@@ -14,4 +14,55 @@ It is and probably will allways be very hacky, but I'm too stupid for emacs so I
 |``CTRL+ALT+C``  | Process the file up to the cursor position |
 |``CTRL+ALT+D``  | Process next block                     	  |
 
-### I recommend using [FiraCode](https://github.com/tonsky/FiraCode/wiki/VS-Code-Instructions) for ligatures
+## ligatures
+- Install the ``prettify-symbols-mode`` extension and [FiraCode](https://github.com/tonsky/FiraCode)
+- Add the following lines to your user ``settings.json``:
+```javascript
+{
+    "editor.fontFamily": "Fira Code",
+    "editor.fontSize": 14,
+
+    "prettifySymbolsMode.revealOn": "cursor",
+    "prettifySymbolsMode.adjustCursorMovement": true,
+    "prettifySymbolsMode.substitutions": [{
+    "language": "fstar",
+    "substitutions": [
+        { "ugly": "*", "pretty": "×", "pre": "\\b", "post": "\\b" },
+        { "ugly": "~>", "pretty": "↝", "pre": "\\b", "post": "\\b" },
+        { "ugly": "<=", "pretty": "≤", "pre": "\\b", "post": "\\b" },
+        { "ugly": ">=", "pretty": "≥", "pre": "\\b", "post": "\\b" },
+        { "ugly": "::", "pretty": "⸬", "pre": "\\b", "post": "\\b" },
+        { "ugly": "/\\\\", "pretty": "∧"},
+        { "ugly": "\\\\/", "pretty": "∨"},
+        { "ugly": "~", "pretty": "¬"},
+        { "ugly": "<>", "pretty": "≠"},
+        { "ugly": "&&", "pretty": "∧"},
+        { "ugly": "\\|\\|", "pretty": "∨"},
+        { "ugly": "=!=", "pretty": "≠"},
+        { "ugly": "<==>", "pretty": "⟺"},
+        { "ugly": "==>", "pretty": "⟹"},
+        { "ugly": "=>", "pretty": "⇒"},
+        { "ugly": "->", "pretty": "→"},
+        //{ "ugly": "\\(\\|", "pretty": "10629", "pre": "\\b", "post": "\\b" },
+        //{ "ugly": "\\|\\)", "pretty":  "10630", "pre": "\\b", "post": "\\b" },
+        { "ugly": "sqrt\\s?",      "pretty": "√", "pre": "\\b", "post": "\\b" },
+        { "ugly": "'a", "pretty": "α", "pre": "\\b", "post": "\\b" },
+        { "ugly": "'b", "pretty": "β", "pre": "\\b", "post": "\\b" },
+        { "ugly": "'c", "pretty": "γ", "pre": "\\b", "post": "\\b" },
+        { "ugly": "'d", "pretty": "δ", "pre": "\\b", "post": "\\b" },
+        { "ugly": "'e", "pretty": "ϵ", "pre": "\\b", "post": "\\b" },
+        { "ugly": "nat", "pretty": "ℕ", "pre": "\\b", "post": "\\b" },
+        { "ugly": "int", "pretty": "ℤ", "pre": "\\b", "post": "\\b" },
+        { "ugly": "fun", "pretty": "λ", "pre": "\\b", "post": "\\b" },
+        { "ugly": "->",  "pretty": "→", "pre": "[^->]", "post": "[^->]" },
+        { "ugly": "forall", "pretty": "∀", "pre": "\\b", "post": "\\b" },
+        { "ugly": "exists", "pretty": "∃", "pre": "\\b", "post": "\\b" },
+        { "ugly": ">>",  "pretty": "≫", "pre": "[^=<>]|^", "post": "[^=<>]|$" },
+        { "ugly": "<<",  "pretty": "≪", "pre": "[^=<>]|^", "post": "[^=<>]|$" },
+        { "ugly": "\\|", "pretty": "║", "pre": "^\\s+" },
+        { "ugly": "True", "pretty": "⊤", "pre": "\\b", "post": "\\b" },
+        { "ugly": "True", "pretty": "⊥", "pre": "\\b", "post": "\\b" }
+       ]}]
+}
+```
+*NOTE: This rules will be provided by fstar-interactive in the future*
