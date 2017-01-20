@@ -55,7 +55,7 @@ It is and probably will allways be very hacky, but I'm too stupid for emacs so I
         { "ugly": "exists", "pretty": "∃", "pre": "\\b", "post": "\\b" },
         { "ugly": ">>",  "pretty": "≫", "pre": "[^=<>]|^", "post": "[^=<>]|$" },
         { "ugly": "<<",  "pretty": "≪", "pre": "[^=<>]|^", "post": "[^=<>]|$" },
-        { "ugly": "\\|", "pretty": "║", "pre": "^\\s+" },
+        { "ugly": "\\|", "pretty": "║", "pre": "^\\s+", "post": "^\\|" },
         { "ugly": "True", "pretty": "⊤", "pre": "\\b", "post": "\\b" },
         { "ugly": "True", "pretty": "⊥", "pre": "\\b", "post": "\\b" }
        ]}]
