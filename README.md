@@ -16,7 +16,7 @@ It is and probably will allways be very hacky, but I'm too stupid for emacs so I
 |``CTRL+ALT+R``  | Reset everything                   	      |
 
 ## ligatures
-- Install the ``prettify-symbols-mode`` extension and [FiraCode](https://github.com/tonsky/FiraCode)
+- Install the ``prettify-symbols-mode`` extension
 - Add the following lines to your user ``settings.json``:
 ```javascript
 {
