@@ -11,5 +11,7 @@ It is and probably will allways be very hacky, but I'm too stupid for emacs so I
 
 | Keys           |Action                                      |
 |----------------|--------------------------------------------|
-|``CTRL+ALT+C``  | Process the file up to the curser position |
+|``CTRL+ALT+C``  | Process the file up to the cursor position |
 |``CTRL+ALT+D``  | Process next block                     	  |
+
+### I recommend using [FiraCode](https://github.com/tonsky/FiraCode/wiki/VS-Code-Instructions) for ligatures
